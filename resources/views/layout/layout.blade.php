@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+    {{-- Copy Nav codes into Layout  --}}
     @include('layout.nav')
 
     <div class="container py-4">
