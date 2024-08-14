@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 // Root Url 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::post('/idea', [IdeaController::class, 'store']) ->name('idea.create');
+Route::post('/idea', [IdeaController::class, 'store'])->name('idea.create');
 
 Route::get('/terms', function() {
   return view('terms');
