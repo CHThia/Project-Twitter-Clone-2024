@@ -12,8 +12,14 @@ use Illuminate\Support\Facades\Route;
 // Root Url 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::post('/idea', [IdeaController::class, 'store'])->name('idea.create');
+Route::post('/ideas', [IdeaController::class, 'store'])->name('ideas.create');
+
+Route::delete('/ideas/{id}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
 
 Route::get('/terms', function() {
   return view('terms');
 });
+
+
+
+// Route::delete('/idea/{id}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
