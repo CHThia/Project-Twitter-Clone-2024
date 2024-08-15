@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class IdeaController extends Controller
 {
+    public function show(Idea $idea) {
+        return view('ideas.show', compact('idea')); // compact('idea) is same as 'idea'=>$idea 
+    }
+
+
     public function store() {
 
         // Check idea input has >= 2 chars && <= 500 chars
@@ -24,16 +29,9 @@ class IdeaController extends Controller
 
     }
 
-    // public function destroy ($id){
+    public function destroy(Idea $idea) {
         
-    //     $idea = Idea::where('id', $id)->firstOrFail()->delete();
-
-    //     return redirect()->route('dashboard')->with('success', 'Idea deleted successfully.');
-    // }
-
-    public function destroy($id) {
-        
-        $idea = Idea::Where('id', $id)->firstOrFail()->delete();
+        $idea->delete();
 
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully.');
 
