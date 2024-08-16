@@ -9,6 +9,9 @@ class IdeaController extends Controller
 {
     public function show(Idea $idea)
     {
+        //* Relationship between Idea and Comment
+        // dd($idea->comments); 
+
         return view('ideas.show', compact('idea')); // compact('idea) is same as 'idea'=>$idea
     }
 
