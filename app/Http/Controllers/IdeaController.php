@@ -18,15 +18,15 @@ class IdeaController extends Controller
     public function store()
     {
         // Check idea input has >= 2 chars && <= 500 chars
-        request()->validate([
+        $validated = request()->validate([
             'content' => 'required | min:2 | max:500',
         ]);
 
-        $idea = Idea::create([
-            'content' => request()->get('content', ''),
-        ]);
+        Idea::create($validated);
 
-        return redirect()->route('dashboard')->with('success', 'Idea created successfully.');
+        return redirect()
+            ->route('dashboard')
+            ->with('success', 'Idea created successfully.');
     }
 
     public function destroy(Idea $idea)
@@ -45,12 +45,11 @@ class IdeaController extends Controller
 
     public function update(Idea $idea)
     {
-        request()->validate([
+        $validated = request()->validate([
             'content' => 'required | min:2 | max:500',
         ]);
 
-        $idea->content = request()->get('content', '');
-        $idea->save();
+        $idea->update($validated);
 
         return redirect()
             ->route('ideas.show', $idea->id)
