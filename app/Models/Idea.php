@@ -12,6 +12,7 @@ class Idea extends Model
     //* protected $guarded = [];
 
     protected $fillable = [
+        'user_id',
         'content',
         'like',
     ];
@@ -19,6 +20,10 @@ class Idea extends Model
     //* Relationship between Idea and Comment
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 }

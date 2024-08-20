@@ -12,7 +12,7 @@ class DashboardController extends Controller
 
         $ideas = Idea::orderBy('created_at', 'DESC');
         
-        //where content like %search input%
+        //Search on specific text when there is a search request
         if(request()->has('search')) {
             $ideas = $ideas->where('content', 'like' , '%'. request()->get('search', '') . '%');
         }

@@ -16,6 +16,8 @@ class CommentController extends Controller
 
         $comment = new Comment();
         $comment-> idea_id = $idea->id;
+        $comment-> user_id = auth()->id();
+
 
         //* Sample to write the lines of code
         // $comment-> content = request('content')->get();
