@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -38,6 +39,13 @@ class UserController extends Controller
             'bio' => 'nullable|min:1|max:500',
             'image' => 'image',
         ]);
+
+        if(request()->has('image')){
+            $imagePath = request()->file('image')->store('profile', 'public');
+            $validated['image'] = $imagePath;
+
+            Storage::disk('public')->delete($user->image);
+        }
 
         $user->update($validated);
 
