@@ -27,14 +27,32 @@
             @include('shared.success-message')
             @include('shared.submit-idea')
             <hr>
-            @foreach ($ideas as $idea)
-                <div class="mt-3">
-                    @include('shared.idea-card')
-                </div>
-            @endforeach
-          <div class="mt-4">
-            {{$ideas->Links()}}
-          </div>
+            @if (count($ideas) > 0)
+                @foreach ($ideas as $idea)
+                    <div class="mt-3">
+                        @include('shared.idea-card')
+                    </div>
+                @endforeach
+            @else
+                <p style="color: rgb(211, 23, 23)">No results Found.</p>
+            @endif
+
+            {{-- Another Method to write the loop function --}}
+            {{-- @forelse ($ideas as $idea)
+                    <div class="mt-3">
+                        @include('shared.idea-card')
+                    </div>
+                @empty
+                  <p class="text-center mt-4 text-danger">No results Found.</p>
+                @endforelse
+            <div class="mt-4"> --}}
+
+            <div class="mt-4">
+
+                {{-- Retain search query during Pagination --}}
+                {{ $ideas->withQueryString()->Links() }}
+
+            </div>
         </div>
         <div class="col-3">
             @include('shared.search-bar')
