@@ -13,7 +13,11 @@ class DashboardController extends Controller
         //*For preview of email tempate (NOTE - Need to login to see)
         // return new WelcomeEmail(auth()->user());
 
+
+        //* Add with() to streamline query loading
+        // Sample Code -- $ideas = Idea::with('user', 'comments.user')->orderBy('created_at', 'DESC');
         $ideas = Idea::orderBy('created_at', 'DESC');
+
         
         //Search on specific text when there is a search request
         if(request()->has('search')) {

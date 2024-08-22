@@ -11,6 +11,9 @@ class Idea extends Model
     
     //* protected $guarded = [];
 
+    //* Streamline query loading
+    protected $with = ['user:id,name,image', 'comments.user:id,name,image'];
+
     protected $fillable = [
         'user_id',
         'content',
