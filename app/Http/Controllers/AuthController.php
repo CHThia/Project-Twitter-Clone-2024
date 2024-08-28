@@ -54,12 +54,14 @@ class AuthController extends Controller
 
             return redirect()->route('dashboard')->with('success', 'Logged in successfully.');
         }
-
+        
+        //* Refractor code to check if 1 or 2 is incorrect -- 28 Aug 2024
         return redirect()
-            ->route('dashboard')
+            ->route('login')
             ->withErrors([
-                'email' => 'No matching user found with the provided email or password.',
-            ]);
+                'email' => 'Please check if email is correct.',
+                'password' => 'Please check if password is correct.'
+        ]);
     }
 
     public function logout()
