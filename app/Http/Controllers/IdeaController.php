@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+// use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class IdeaController extends Controller
 {
+    // use AuthorizesRequests;
+
+
     public function show(Idea $idea)
     {
         //* Relationship between Idea and Comment
@@ -22,7 +27,7 @@ class IdeaController extends Controller
             'content' => 'required | min:2 | max:500',
         ]);
         
-        $validated['user_id'] = auth()->id();
+        $validated['user_id'] = Auth::id();
 
         Idea::create($validated);
 
@@ -33,9 +38,11 @@ class IdeaController extends Controller
 
     public function destroy(Idea $idea)
     {
-        if(auth()->id() !== $idea->user_id){
+        if(Auth::id() !== $idea->user_id){
             abort(404, "You are not the main author of this post.");
         }
+
+        // $this->authorize('idea.delete', $idea);
 
         $idea->delete();
 
@@ -44,9 +51,11 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea)
     {
-        if(auth()->id() !== $idea->user_id){
+        if(Auth::id() !== $idea->user_id){
             abort(404, "You are not the main author of this post.");
         }
+
+        // $this->authorize('idea.edit', $idea);
 
         $editing = true;
 
@@ -55,9 +64,11 @@ class IdeaController extends Controller
 
     public function update(Idea $idea)
     {
-        if(auth()->id() !== $idea->user_id){
+        if(Auth::id() !== $idea->user_id){
             abort(404, "You are not the main author of this post.");
         }
+
+        // $this->authorize('idea.edit', $idea);
 
         $validated = request()->validate([
             'content' => 'required | min:2 | max:500',
