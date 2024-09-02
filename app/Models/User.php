@@ -17,6 +17,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'is_admin',
         'name',
         'bio',
         'image',
@@ -44,6 +45,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            ''
         ];
     }
 
@@ -82,4 +84,5 @@ class User extends Authenticatable
 
         return "https://api.dicebear.com/6.x/fun-emoji/svg?seed={$this->name}";
     }
+
 }
